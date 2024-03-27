@@ -3,6 +3,7 @@
   justify-content: flex-end;
   margin-right: 24px;
   margin-top: 32px;
+  cursor: pointer;
 }
 
 .login-button > div {
@@ -14,7 +15,12 @@
   justify-content: center;
 }
 
+.nav-section img:hover {
+  cursor: pointer;
+}
+
 .menu-area {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,6 +30,7 @@
   display: flex;
   list-style-type: none;
   margin-right: 40px;
+  margin-bottom: 0;
 }
 
 .menu-list li {
@@ -37,7 +44,7 @@
 .menu-search input {
   border: none;
   border-bottom: 1px solid #000;
-  padding: 12px 0 12px 24px;
+  padding: 0 0 12px 24px;
 }
 
 .menu-search input:focus {
@@ -46,5 +53,51 @@
 
 .menu-search .search-button {
   position: absolute;
-  top: 12px;
+  top: 4px;
+}
+
+/* ProductAll page */
+.product-card img {
+  width: 100%;
+}
+
+.product-card:hover {
+  transform: scale(1.1);
+}
+
+/* ProductDetail page */
+.product-image {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.choice-text {
+  color: rgb(30, 187, 135);
+  font-size: 14px;
+}
+
+.fz-20 {
+  font-size: 20px;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mb-32 {
+  margin-bottom: 32px;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.dropdown-button {
+  background: red;
+}
+
+.add-button {
+  width: 100%;
 }
