@@ -15,6 +15,10 @@ button {
   background: none;
 }
 
+img {
+  vertical-align: top;
+}
+
 .login-button {
   display: flex;
   justify-content: flex-end;
@@ -108,9 +112,9 @@ button {
 }
 
 /* ProductDetail page */
-.product-image {
-  display: flex;
-  justify-content: flex-end;
+.product-image img {
+  width: 100%;
+  height: auto;
 }
 
 .choice-text {
@@ -286,5 +290,13 @@ button {
     left: 0;
     top: 0;
     z-index: 99;
+  }
+
+  .product-image img {
+    margin-bottom: 20px;
+  }
+
+  .add-button {
+    margin-bottom: 80px;
   }
 }
