@@ -28,7 +28,7 @@ const ProductDetail = () => {
           </div>
           <Dropdown className="mb-40">
             <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">
-              사이즈 선택
+              Size
             </Dropdown.Toggle>
             <Dropdown.Menu>
               {product?.size.length > 0 &&

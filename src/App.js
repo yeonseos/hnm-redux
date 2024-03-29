@@ -25,8 +25,8 @@ function App() {
     console.log("aaaa", authenticate);
   }, [authenticate]);
   return (
-    <div>
-      <Navbar />
+    <div className="wrap">
+      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate} />
       <Routes>
         <Route path="/" element={<ProductAll />} />
         <Route

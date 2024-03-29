@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faX, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ authenticate, setAuthenticate }) => {
+  const [isActive, setIsActive] = useState(false);
+  const [isShow, setIsShow] = useState(false);
+  const inputRef = useRef(null);
+
+  const menuClick = () => {
+    setIsActive(!isActive);
+  };
+
+  const searchClick = () => {
+    setIsShow(!isShow);
+  };
+
+  const textClear = () => {
+    inputRef.current.value = null;
+  };
+
   const menuList = [
     "여성",
     "Divided",
@@ -17,9 +33,7 @@ const Navbar = () => {
   ];
 
   const navigate = useNavigate();
-  const goToLogin = () => {
-    navigate("/login");
-  };
+
   const goToHome = () => {
     navigate("/");
   };
@@ -30,44 +44,74 @@ const Navbar = () => {
       let keyword = event.target.value;
       // url 변경
       navigate(`/?q=${keyword}`);
+      textClear();
     }
   };
 
   return (
-    <div>
-      {/* nav area */}
+    <header className="header">
       <div>
-        <div className="login-button" onClick={goToLogin}>
-          <FontAwesomeIcon icon={faUser} />
-          <div>로그인</div>
-        </div>
+        {authenticate ? (
+          <div onClick={() => setAuthenticate(false)} className="login-button">
+            <FontAwesomeIcon icon={faUser} />
+            <div style={{ cursor: "pointer" }}>로그아웃</div>
+          </div>
+        ) : (
+          <div onClick={() => navigate("/login")} className="login-button">
+            <FontAwesomeIcon icon={faUser} />
+            <div style={{ cursor: "pointer" }}>로그인</div>
+          </div>
+        )}
       </div>
-      {/* logo area */}
-      <div className="nav-section mb-32">
+
+      <div className="nav-section">
         <img
-          width={100}
+          className="logo-img"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/H%26M-Logo.svg/2560px-H%26M-Logo.svg.png"
           alt="H&M logo"
           onClick={goToHome}
         ></img>
       </div>
-      <div className="menu-area mb-40">
-        <ul className="menu-list">
-          {menuList.map((menu) => (
-            <li key={menu}>{menu}</li>
-          ))}
-        </ul>
 
-        <div className="menu-search">
-          <FontAwesomeIcon icon={faSearch} className="search-button" />
+      <div className="menu-area">
+        <button className="menu-btn" onClick={menuClick}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+
+        <nav className={"menu-list " + (isActive ? "active" : "")}>
+          <ul>
+            {menuList.map((menu) => (
+              <li key={menu}>{menu}</li>
+            ))}
+          </ul>
+          <button className="close-btn" onClick={menuClick}>
+            <FontAwesomeIcon icon={faX} />
+          </button>
+        </nav>
+
+        <div className={"menu-search " + (isShow ? "active" : "")}>
+          <FontAwesomeIcon
+            icon={faSearch}
+            className="search-btn"
+            onClick={searchClick}
+          />
           <input
             type="text"
             onKeyDown={(event) => search(event)}
-            placeholder="제품 검색"
+            placeholder="Search"
+            ref={inputRef}
           />
+          <button className="search-close" onClick={searchClick}>
+            <FontAwesomeIcon icon={faX} />
+          </button>
         </div>
+
+        <div
+          className={"bg-area " + (isActive ? "active" : "")}
+          onClick={menuClick}
+        ></div>
       </div>
-    </div>
+    </header>
   );
 };
 
