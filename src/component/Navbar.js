@@ -3,11 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faBars, faX, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticateAction } from "../redux/actions/authenticateAction";
 
-const Navbar = ({ authenticate, setAuthenticate }) => {
+const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const inputRef = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authenticate = useSelector((state) => state.auth.authenticate);
 
   const menuClick = () => {
     setIsActive(!isActive);
@@ -32,8 +37,6 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
     "지속가능성",
   ];
 
-  const navigate = useNavigate();
-
   const goToHome = () => {
     navigate("/");
   };
@@ -51,8 +54,11 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
   return (
     <header className="header">
       <div>
-        {authenticate ? (
-          <div onClick={() => setAuthenticate(false)} className="login-button">
+        {authenticate === true ? (
+          <div
+            onClick={() => dispatch(authenticateAction.logout())}
+            className="login-button"
+          >
             <FontAwesomeIcon icon={faUser} />
             <div style={{ cursor: "pointer" }}>로그아웃</div>
           </div>
