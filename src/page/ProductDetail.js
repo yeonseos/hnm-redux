@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Dropdown, Row, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { productAction } from "../redux/actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
+
+import { fetchProductDetail } from "../redux/reducers/productSlice";
 
 const ProductDetail = () => {
   let { id } = useParams();
-  const product = useSelector((state) => state.product.selectedItem);
   const dispatch = useDispatch();
-  const getProductDetail = async () => {
-    dispatch(productAction.getProductDetail(id));
+  const product = useSelector((state) => state.product.selectedItem);
+
+  const getProductDetail = () => {
+    dispatch(fetchProductDetail(id));
   };
 
   useEffect(() => {
     getProductDetail();
   }, []);
+
   return (
     <Container>
       <Row>
         <Col md="6" className="product-image">
-          <img src={product?.img} />
+          <img src={product?.img} alt="상품이미지" />
         </Col>
         <Col md="6">
           <div className="fz-20">{product?.title}</div>
           <div className="fz-20 fw-bold">₩ {product?.price}</div>
           <div className="choice-text fw-bold mb-20">
-            {product?.choice == true ? "Conscious choice" : ""}
+            {product?.choice === true ? "Conscious choice" : ""}
           </div>
           <Dropdown className="mb-40">
             <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">

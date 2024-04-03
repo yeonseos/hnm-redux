@@ -8,7 +8,7 @@ const ProductCard = ({ item }) => {
   return (
     <div className="product-card" onClick={showDetail}>
       <div className="card-img-wrap mb-12">
-        <img src={item?.img} />
+        <img src={item?.img} alt="상품이미지" />
       </div>
       <div className="text-highlight">{item?.new === true ? "New" : ""}</div>
       <div>{item?.title}</div>

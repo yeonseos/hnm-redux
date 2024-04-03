@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authenticateAction } from "../redux/actions/authenticateAction";
+import { logInSuccess } from "../redux/reducers/authenticateReducer";
+// import { authenticateAction } from "../redux/actions/authenticateAction";
 
-const Login = ({ setAuthenticate }) => {
+const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Login = ({ setAuthenticate }) => {
     // preventDefault = 페이지 리프레쉬 되는걸 막아주기 위해서 사용
     event.preventDefault();
     console.log("login user fuction issue");
-    dispatch(authenticateAction.login(id, password));
+    dispatch(logInSuccess({ id, password }));
     navigate("/");
   };
   return (
