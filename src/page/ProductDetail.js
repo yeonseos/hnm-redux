@@ -10,7 +10,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.selectedItem);
 
-  const getProductDetail = () => {
+  const getProductDetail = async () => {
     dispatch(fetchProductDetail(id));
   };
 
